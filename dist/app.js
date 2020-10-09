@@ -25,9 +25,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const path = __importStar(require("path"));
 const app = express_1.default();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.get("/", (req, res) => {
-    console.log(__dirname);
+    console.log("Get request recieved");
     res.sendFile(path.join(__dirname, "client", "index.html"));
+    //   res.send("Compress ME !!");
 });
 app.listen(PORT, () => console.log(`Server Started on PORT ${PORT}`));
