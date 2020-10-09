@@ -5,8 +5,9 @@ const app: Application = express();
 const PORT: number = 5000;
 
 app.get("/", (req: Request, res: Response) => {
-  console.log(__dirname);
-  res.sendFile(path.join(__dirname, "client", "index.html"));
+  console.log("Get request recieved");
+  //   res.sendFile(path.join(__dirname, "client", "index.html"));
+  res.send("Compress ME !!");
 });
 
 app.listen(PORT, () => console.log(`Server Started on PORT ${PORT}`));
