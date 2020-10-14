@@ -1,4 +1,3 @@
-
 // function takes the compression string and returns a frequency map
 export function createFrequencyMap(text: string): Map<string, number> {
   let freqMap: Map<string, number> = new Map();
@@ -11,7 +10,7 @@ export function createFrequencyMap(text: string): Map<string, number> {
     else freqMap.set(currChar, 1);
   }
 
-  for (let e of freqMap.entries()) console.log(e[0], e[1]);
+
 
   return freqMap;
 }
