@@ -9,8 +9,5 @@ export function createFrequencyMap(text: string): Map<string, number> {
       freqMap.set(currChar, freqMap.get(currChar)! + 1);
     else freqMap.set(currChar, 1);
   }
-
-
-
   return freqMap;
 }

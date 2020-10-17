@@ -1,17 +1,15 @@
-import { HeapNode } from "./MinHeap";
-
 // This queue will mainly be used for holding array indeces during level order traversal:
 export default class Queue {
-  arr: Array<number>;
+  arr: Array<any>;
   constructor() {
     this.arr = new Array();
   }
 
-  push(x: number): void {
+  push(x: any): void {
     this.arr.push(x);
   }
 
-  pop(): number {
+  pop(): any {
     if (this.arr.length === 0) return -1;
     const front: number = this.arr[0];
     this.arr = this.arr.slice(1);
