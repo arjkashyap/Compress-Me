@@ -58,14 +58,7 @@ export default class MinHeap {
 
   // retuns true if n1 is smaller than n2
   compareNodes(n1: HeapNode, n2: HeapNode): boolean {
-    try {
-      if (n1.freq < n2.freq) return true;
-    } catch (e) {
-      console.log(n2);
-      console.log(e);
-    } finally {
-      return false;
-    }
+    return n1.freq < n2.freq;
   }
 
   // get index of left child
@@ -90,15 +83,17 @@ export default class MinHeap {
     return Math.floor((ci - 1) / 2);
   }
 
+  // 0 1 2 3 4 5
+  // x - - - - -
+  // x x x - - -
+  // x x x x x -
+
   push(node: HeapNode): void {
     if (this.size === this.cap) {
       throw "Heap Capacity exceed";
     }
     this.size++;
-    // this.arr[this.size - 1] = node;
     this.arr.push(node);
-    // console.log("Inserting new item, current size is ", this.arr.length);
-    // this.arr[this.arr.length - 1] = node;
     for (let i = this.size - 1; i !== 0; ) {
       if (
         this.compareNodes(this.arr[i], this.arr[this.parentIndex(i)]) === false
@@ -132,9 +127,10 @@ export default class MinHeap {
     let lt: number = this.leftChildIndex(index);
     let rt: number = this.rightChildIndex(index);
 
-    if (lt && this.arr[lt] < this.arr[smallest]) smallest = lt;
-    if (rt && this.arr[rt] < this.arr[smallest]) smallest = rt;
-
+    if (lt < this.arr.length && this.arr[lt].freq < this.arr[smallest].freq)
+      smallest = lt;
+    if (rt < this.arr.length && this.arr[rt].freq < this.arr[smallest].freq)
+      smallest = rt;
     if (smallest != index) {
       let tmp: HeapNode = this.arr[smallest];
       this.arr[smallest] = this.arr[index];
@@ -149,7 +145,6 @@ export default class MinHeap {
 
   // Display heap content (level order) for testing
   display(): void {
-    // this.arr.forEach((e, i) => (s += `${i} - ${e?.char} - ${e?.freq} || `));
     let q: Queue = new Queue();
     q.push(0);
     while (q.empty() === false) {
@@ -159,7 +154,6 @@ export default class MinHeap {
       const print: string = `${curr === undefined ? "" : curr} : ${
         this.arr[currIndex]?.freq
       } || `;
-      // console.log(print);
       process.stdout.write(print + " ");
       if (this.leftChildIndex(currIndex) < this.arr.length)
         q.push(this.leftChildIndex(currIndex));

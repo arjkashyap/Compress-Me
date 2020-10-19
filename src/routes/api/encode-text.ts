@@ -11,6 +11,8 @@ interface ResponseMsg {
   msg: string;
 }
 
+// @get
+// renders client service
 encodeTextRouter.get("/", (req: Request, res: Response) => {
   console.log("Get Request on text compression");
   const responseMsg: ResponseMsg = {
@@ -20,7 +22,7 @@ encodeTextRouter.get("/", (req: Request, res: Response) => {
   res.json(responseMsg);
 });
 
-// @post api
+// @post
 // Compress string
 encodeTextRouter.post("/", (req: Request, res: Response) => {
   const text: string = req.body.compressionString; // Text to be compressed
@@ -46,7 +48,7 @@ encodeTextRouter.post("/", (req: Request, res: Response) => {
     const heapNode: HeapNode = new HeapNode(NodeObj);
     heap.push(heapNode);
   }
-  const hmt = new HMT(heap);
+  const hmt = new HMT(text, heap);
   hmt.display();
   responseMsg = {
     status: 200,
