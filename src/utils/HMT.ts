@@ -14,6 +14,10 @@ export default class HMT {
     this.dict = this.buildDict();
   }
 
+  getDict(): Map<string, string> {
+    return this.dict;
+  }
+
   // build Huffman Tree
   buildHMT(): HeapNode {
     while (this.heap.getSize() !== 1) {
