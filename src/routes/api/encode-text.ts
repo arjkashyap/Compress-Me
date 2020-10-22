@@ -1,6 +1,6 @@
 // Route for text compression
 
-import express, { Router, Request, Response, json } from "express";
+import express, { Router, Request, Response } from "express";
 import { createFrequencyMap } from "../../utils/FrequencyMap";
 import MinHeap, { NodeData, leafNode, HeapNode } from "../../utils/MinHeap";
 import HMT from "../../utils/HMT";
@@ -17,17 +17,6 @@ interface ResponseText {
   text: Array<number>;
   dict: Array<Array<string>>;
 }
-
-// @get
-// renders client service
-encodeTextRouter.get("/", (req: Request, res: Response) => {
-  console.log("Get Request on text compression");
-  const responseMsg: ResponseMsg = {
-    status: 200,
-    msg: "Get Request recieved. Now what ?",
-  };
-  res.json(responseMsg);
-});
 
 // @post
 // Compress string
@@ -69,6 +58,13 @@ encodeTextRouter.post("/", (req: Request, res: Response) => {
     text: encodedArray,
     dict: Array.from(dict),
   };
-
+  console.log(
+    `Size of orignal text: ${text.length} bytes. Size of Encoded text: ${
+      encodedArray.length * 4
+    } bytes.`
+  );
+  const compressionPercent: number =
+    ((encodedArray.length * 4) / text.length) * 100;
+  console.log(`Text compressed by ${compressionPercent.toFixed(3)} %`);
   return res.status(200).json(response);
 });
