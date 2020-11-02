@@ -5,23 +5,19 @@ import { createFrequencyMap } from "../../utils/FrequencyMap";
 import MinHeap, { NodeData, leafNode, HeapNode } from "../../utils/MinHeap";
 import HMT from "../../utils/HMT";
 import { textEncode, readBits } from "../../utils/Encoder";
+import { EncoderResponse } from "../../types";
 export const encodeTextRouter: Router = express.Router();
-
+export let orignalTex: string;
 interface ResponseMsg {
   status: number;
   msg: string;
-}
-
-interface ResponseText {
-  status: number;
-  text: Array<number>;
-  dict: Array<Array<string>>;
 }
 
 // @post
 // Compress string
 encodeTextRouter.post("/", (req: Request, res: Response) => {
   const text: string = req.body.compressionString; // Text to be compressed
+  orignalTex = text;
   let responseMsg: ResponseMsg;
 
   if (text.length === 0) {
@@ -53,7 +49,7 @@ encodeTextRouter.post("/", (req: Request, res: Response) => {
   const encodedArray = textEncode(text, dict);
   readBits(encodedArray);
 
-  const response: ResponseText = {
+  const response: EncoderResponse = {
     status: 200,
     text: encodedArray,
     dict: Array.from(dict),
@@ -65,6 +61,9 @@ encodeTextRouter.post("/", (req: Request, res: Response) => {
   );
   const compressionPercent: number =
     ((encodedArray.length * 4) / text.length) * 100;
-  console.log(`Text compressed by ${compressionPercent.toFixed(3)} %`);
+
+  const eff = ((text.length - encodedArray.length * 4) / text.length) * 100;
+  console.log(`Text compressed by ${eff.toFixed(3)} %`);
+  console.log("Size of dictionary is : ", hmt.dictSize(), " bytes");
   return res.status(200).json(response);
 });

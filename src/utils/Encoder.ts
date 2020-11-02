@@ -15,7 +15,7 @@ Map {
  7 6 5 4 3 2 1 0
 */
 
-const MAXBITS = 32;
+import { MAX_BIT } from "../constatns";
 
 export function textEncode(
   txt: string,
@@ -31,7 +31,7 @@ export function textEncode(
 
     const charCode: string = dict.get(currChar)!;
 
-    const bitsRemaining = MAXBITS - bitPtr - 1;
+    const bitsRemaining = MAX_BIT - bitPtr - 1;
 
     if (bitsRemaining < charCode.length) {
       encodedArr.push(0);
@@ -57,6 +57,6 @@ export function textEncode(
 export function readBits(encodedArr: Array<number>) {
   encodedArr.forEach((e) => {
     let bin: string = e.toString(2);
-    console.log(e, bin, bin.length);
+    console.log(bin, "--> ", bin.length, " bits");
   });
 }

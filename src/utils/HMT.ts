@@ -4,7 +4,7 @@ import Queue from "./Queue";
 
 export default class HMT {
   root: HeapNode;
-  dict: Map<string, string>;
+  dict: Map<string, string>; // text -> code
   heap: Minheap;
   text: string; // text to be encoded
   constructor(text: string, heap: Minheap) {
@@ -16,6 +16,14 @@ export default class HMT {
 
   getDict(): Map<string, string> {
     return this.dict;
+  }
+
+  dictSize(): number {
+    let size: number = 0;
+    for (let [key, value] of this.dict) {
+      size += key.length + value.length;
+    }
+    return size;
   }
 
   // build Huffman Tree
@@ -39,6 +47,31 @@ export default class HMT {
     return this.heap.top();
   }
 
+  // function returns true if the string contains all 0s
+  isAllZeros(str: String): boolean {
+    for (let i = 0; i < str.length; i++) {
+      if (str[i] === "1") return false;
+    }
+    return true;
+  }
+
+  /*
+    After the dictonary is built, this function is responsible for handling the corner case bug.
+    When we have a case where a dictonary key has a value: '000', this induces a bug when we are decoding.
+    The right bits in the number are unset i;e 0's which can be mis intrepreted
+
+    Therefore we take the value with all zeros and replace its last bit to a 1
+    000 -> 001
+  */
+  updateZeroValue(dict: Map<string, string>): Map<string, string> {
+    for (let [key, value] of dict) {
+      if (this.isAllZeros(value)) {
+        dict.set(key, value + "1");
+      }
+    }
+    return dict;
+  }
+
   buildDict_util(dct: Map<string, string>, root: HeapNode, str: string = "") {
     if (root.left) {
       const newStr = str + "0";
@@ -59,10 +92,12 @@ export default class HMT {
   }
 
   buildDict(): Map<string, string> {
-    const dct: Map<string, string> = new Map();
+    let dct: Map<string, string> = new Map();
     this.buildDict_util(dct, this.root);
     console.log("dictonary built");
-    console.log(dct);
+
+    // Changing the string with only zeros to handle corner case
+    dct = this.updateZeroValue(dct);
     return dct;
   }
 

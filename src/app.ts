@@ -9,6 +9,7 @@ const PORT: any = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
 
+// locahsot:500/
 app.get("/", (req: Request, res: Response) => {
   console.log("Get request recieved");
   res.sendFile(path.join(__dirname, "client", "index.html"));

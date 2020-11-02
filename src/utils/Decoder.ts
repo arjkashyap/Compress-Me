@@ -3,8 +3,8 @@
 // code -> text
 
 import { FORMERR } from "dns";
-
-const MAX_BIT = 32;
+import { MAX_BIT } from "../constatns";
+import { DecoderResponse } from "../types";
 
 export function convertArrayToDict(
   arr: Array<Array<string>>
@@ -33,12 +33,11 @@ export function decodeText(
 ): string {
   let result: string = "";
   encodedArray.forEach((code: number, index: number) => {
-    console.log("decoding: ", code);
     let local_code: string = "";
-    let bitPtr = 0;
-    for (let k = 0; k < MAX_BIT; k++) {
+    let bitPtr: number;
+    for (bitPtr = 0; bitPtr < MAX_BIT; bitPtr++) {
       // check if the bit at k index is set
-      const isBitSet: boolean = (code & (1 << k)) !== 0 ? true : false;
+      const isBitSet: boolean = (code & (1 << bitPtr)) !== 0 ? true : false;
       if (isBitSet) {
         local_code += "1";
       } else {
@@ -52,5 +51,6 @@ export function decodeText(
     }
   });
   console.log(result);
-  return result;
+
+  return result
 }

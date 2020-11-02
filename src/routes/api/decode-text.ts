@@ -1,5 +1,7 @@
 import express, { Router, Request, Response } from "express";
 import { convertArrayToDict, decodeText } from "../../utils/Decoder";
+import { orignalTex } from "./encode-text";
+import { DecoderResponse } from "../../types";
 
 export const decodeTextRouter: Router = express.Router();
 
@@ -15,12 +17,16 @@ export const decodeTextRouter: Router = express.Router();
 decodeTextRouter.post("/", (req: Request, res: Response) => {
   const text: Array<number> = req.body.text;
   const dict: Map<string, string> = convertArrayToDict(req.body.dict);
-
-  console.log(text);
-  console.log(dict);
+  // console.log("Orignal text is : ", orignalTex);
+  // console.log(text);
   console.log("Decodding text");
 
   const decodedText: string = decodeText(text, dict);
 
-  res.send("Post request on decode text");
+  const response: DecoderResponse = {
+    status: 200,
+    text: decodedText,
+  };
+
+  return res.status(200).json(response);
 });
