@@ -9,6 +9,9 @@ const PORT: any = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
 
+// console.log(__dirname + "/client");
+app.use(express.static(__dirname + "/client"));
+
 // locahsot:500/
 app.get("/", (req: Request, res: Response) => {
   console.log("Get request recieved");

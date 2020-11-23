@@ -1,0 +1,26 @@
+.html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.heading-container {
+  margin: 0.1rem;
+  color: white;
+  padding: 1.5rem;
+  background-color: rgb(66, 202, 107);
+}
+
+.title {
+  font-style: bold;
+  color: black;
+}
+
+.source-code-btn {
+  border: black;
+  background-color: rgb(3, 41, 25);
+}
+
+.source-code-btn:hover {
+  background-color: rgb(2, 12, 12);
+}
