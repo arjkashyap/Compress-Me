@@ -12,7 +12,11 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Electrolize&family=Goldman&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./styles/index.css" />
   </head>
 
@@ -22,19 +26,43 @@
       <p class="lead">
         A simple client service for lossless compression of text data.
       </p>
-      <hr class="my-6" />
-      <p>
-        We use a high performance REST API to compress the text using Huffman
-        Decoding technique. The API is written by keeping in mind the
-        performance and memory constrains of HTTP services.
-      </p>
-      <a class="source-code-btn btn btn-primary btn-lg" href="#" role="button"
+      <a
+        class="source-code-btn btn btn-primary btn-lg"
+        target="__blank"
+        href="https://github.com/bing101/Compress-Me"
+        role="button"
         >Source Code</a
       >
     </div>
     <br />
-    <div class="container">
+    <div class="gs">
       <h3>Getting Started</h3>
+    </div>
+    <div class="main container">
+      <div class="enc card" style="width: 18rem">
+        <div class="card-body">
+          <h5 class="card-title">Compression</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+          <p class="card-text">
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </p>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
+      <div class="dec card" style="width: 18rem">
+        <div class="card-body">
+          <h5 class="card-title">Decompress</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+          <p class="card-text">
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </p>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
     </div>
 
     <script

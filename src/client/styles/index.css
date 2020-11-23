@@ -4,23 +4,58 @@
   height: 100%;
 }
 
+:root {
+  --clr-pm: rgb(67, 185, 103);
+  --clr-sc: black;
+  --wt: white;
+}
+
 .heading-container {
   margin: 0.1rem;
-  color: white;
+  color: var(--wt);
   padding: 1.5rem;
-  background-color: rgb(66, 202, 107);
+  background-color: var(--clr-pm);
 }
 
 .title {
   font-style: bold;
+  font-family: "Goldman", cursive;
   color: black;
 }
 
 .source-code-btn {
   border: black;
+  border: solid var(--wt) 1px;
   background-color: rgb(3, 41, 25);
 }
 
 .source-code-btn:hover {
   background-color: rgb(2, 12, 12);
+}
+
+.gs {
+  margin: 0;
+  text-align: center;
+}
+
+.main {
+  display: flex;
+}
+
+.enc {
+  flex: 1;
+  border: 2px solid var(--clr-sc);
+  margin: 0.2rem;
+}
+
+.dec {
+  flex: 1;
+  border: 2px solid var(--clr-sc);
+  margin: 0.2rem;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    background-color: lightblue;
+  }
 }
