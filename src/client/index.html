@@ -39,29 +39,84 @@
       <h3>Getting Started</h3>
     </div>
     <div class="main container">
-      <div class="enc card" style="width: 18rem">
-        <div class="card-body">
-          <h5 class="card-title">Compression</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
+      <div class="enc container">
+        <h3>Compression</h3>
+        <hr />
+        <p>
+          To perform text compression, click on the link given below and enter
+          the text. After clicking on submit, the browser makes request to our
+          compression API which returns an encoded file and a dictonary. This
+          file is the result of humman encoding and can be decompressed using
+          the dictonary provided
+        </p>
+
+        <button
+          class="cmp-btn btn btn-primary btn-lg btn-block"
+          data-toggle="modal"
+          data-target="#enc-modal"
+        >
+          Compress Text
+        </button>
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="enc-modal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="enc-modal"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="enc-modal-label">Compress File</h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+              </div>
+
+              <!-- File upload -->
+              <label for="input-file">Choose and upload the text file you want to compress<label><br />
+              <input type="file" id="input-file" />
+
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="button" class="submit-btn btn btn-primary">
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="dec card" style="width: 18rem">
-        <div class="card-body">
-          <h5 class="card-title">Decompress</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
-        </div>
+
+      <div class="dec container">
+        <h3>Decompress</h3>
+        <hr />
+        <p>
+          To perform text compression, click on the link given below and enter
+          the text. After clicking on submit, the browser makes request to our
+          compression API which returns an encoded file and a dictonary. This
+          file is the result of humman encoding and can be decompressed using
+          the dictonary provided
+        </p>
+        <button class="dec-btn btn btn-primary btn-lg btn-block">
+          Decompress Text
+        </button>
       </div>
     </div>
 
@@ -80,5 +135,6 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+    <script src="./scripts/index.js"></script>
   </body>
 </html>
