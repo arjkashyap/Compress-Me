@@ -50,7 +50,7 @@ export function decodeText(
       }
     }
   });
-  console.log(result);
+  // console.log(result);
 
-  return result
+  return result;
 }

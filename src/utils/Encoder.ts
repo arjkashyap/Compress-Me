@@ -57,6 +57,6 @@ export function textEncode(
 export function readBits(encodedArr: Array<number>) {
   encodedArr.forEach((e) => {
     let bin: string = e.toString(2);
-    console.log(bin, "--> ", bin.length, " bits");
+    // console.log(bin, "--> ", bin.length, " bits");
   });
 }

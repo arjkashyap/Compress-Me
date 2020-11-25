@@ -6,6 +6,8 @@ import MinHeap, { NodeData, leafNode, HeapNode } from "../../utils/MinHeap";
 import HMT from "../../utils/HMT";
 import { textEncode, readBits } from "../../utils/Encoder";
 import { EncoderResponse } from "../../types";
+import * as path from "path";
+
 export const encodeTextRouter: Router = express.Router();
 export let orignalTex: string;
 interface ResponseMsg {
@@ -49,15 +51,11 @@ encodeTextRouter.post("/", (req: Request, res: Response) => {
   const encodedArray = textEncode(text, dict);
   readBits(encodedArray);
 
-  const response: EncoderResponse = {
-    status: 200,
-    text: encodedArray,
-    dict: Array.from(dict),
-  };
+  const orignalTextSize = text.length;
+  const encodedTextSize = encodedArray.length * 4;
+
   console.log(
-    `Size of orignal text: ${text.length} bytes. Size of Encoded text: ${
-      encodedArray.length * 4
-    } bytes.`
+    `Size of orignal text: ${orignalTextSize} bytes. Size of Encoded text: ${encodedTextSize} bytes.`
   );
   const compressionPercent: number =
     ((encodedArray.length * 4) / text.length) * 100;
@@ -65,5 +63,17 @@ encodeTextRouter.post("/", (req: Request, res: Response) => {
   const eff = ((text.length - encodedArray.length * 4) / text.length) * 100;
   console.log(`Text compressed by ${eff.toFixed(3)} %`);
   console.log("Size of dictionary is : ", hmt.dictSize(), " bytes");
+
+  const response: EncoderResponse = {
+    status: 200,
+    orignalSize: orignalTextSize,
+    text: encodedArray,
+    textSize: encodedTextSize,
+    dict: Array.from(dict),
+    eff: compressionPercent,
+  };
+
+  const resultFile = path.join(__dirname, "tmp", "result.txt");
   return res.status(200).json(response);
+  // return res.status(200).download(resultFile);
 });
