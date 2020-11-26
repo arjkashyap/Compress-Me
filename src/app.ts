@@ -4,6 +4,8 @@ import * as bodyParser from "body-parser";
 import { encodeTextRouter } from "./routes/api/encode-text";
 import { decodeTextRouter } from "./routes/api/decode-text";
 
+const upload = require("express-fileupload");
+
 const app: Application = express();
 const PORT: any = process.env.PORT || 5000;
 
@@ -13,6 +15,16 @@ export const bufferCompressed = path.join(
   "buffer-store",
   "compressed-out"
 );
+
+// Compresse file uploaded by the user during decompress request
+export const bufferUpload = path.join(
+  __dirname,
+  "utile",
+  "buffer-store",
+  "compressed-upload"
+);
+
+app.use(upload());
 
 app.use(bodyParser.json());
 

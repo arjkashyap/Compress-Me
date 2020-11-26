@@ -119,3 +119,7 @@ async function makeRequest() {
     document.body.removeChild(link);
   }
 }
+
+function makeDecompressRequest() {
+  console.log("ahoy ?");
+}

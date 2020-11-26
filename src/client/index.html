@@ -109,6 +109,7 @@
         </div>
       </div>
 
+        <!-- Decompress  -->
       <div class="dec container">
         <h3>Decompress</h3>
         <hr />
@@ -119,9 +120,72 @@
           file is the result of humman encoding and can be decompressed using
           the dictonary provided
         </p>
-        <button class="dec-btn btn btn-primary btn-lg btn-block">
+        <button class="dec-btn btn btn-primary btn-lg btn-block"
+                data-toggle="modal"
+                data-target="#dec-modal"
+        >
           Decompress Text
         </button>
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="dec-modal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="dec-modal"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="dec-modal-label">Compress File</h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+              </div>
+
+              <!-- File upload -->
+              <div class="file-form">
+              
+              <form method="POST" enctype="multipart/form-data" action="/api/decode-text">
+                <label for="input-bin-file">Upload the bin file<label><br />
+                <input type="file" id="input-bin-file" name="filename"/>
+                <input type="submit" value="upload">
+              </form>
+              
+              <hr/>
+              <label for="input-json-file">Upload the dictonary json file<label><br />
+              <input type="file" id="input-json-dec" />
+
+
+              </div>
+                <p class="validator" id="dec-validator"></p>
+                <tr/>
+                <p class="validator" id="dec-details"></p>
+                <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="button" id="txt-submit" class="submit-btn btn btn-primary" onclick="makeDecompressRequest()">
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
