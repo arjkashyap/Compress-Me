@@ -8,6 +8,8 @@ import { textEncode, readBits } from "../../utils/Encoder";
 import { EncoderResponse } from "../../types";
 import * as path from "path";
 import { createeBufferFile, readBufferFile } from "../../utils/HandleBuffer";
+import { createDictJson } from "../../utils/HandleDictonary";
+
 export const encodeTextRouter: Router = express.Router();
 export let orignalTex: string;
 interface ResponseMsg {
@@ -53,7 +55,7 @@ encodeTextRouter.post("/", (req: Request, res: Response) => {
 
   const orignalTextSize = text.length;
   const encodedTextSize = encodedArray.length * 4;
-
+  console.log(dict);
   console.log(
     `Size of orignal text: ${orignalTextSize} bytes. Size of Encoded text: ${encodedTextSize} bytes.`
   );
@@ -73,12 +75,16 @@ encodeTextRouter.post("/", (req: Request, res: Response) => {
     status: 200,
     orignalSize: orignalTextSize,
     textSize: encodedTextSize,
-    eff: compressionPercent,
+    eff: eff,
   };
 
   // create buffer file
   createeBufferFile(encodedArray);
+
   console.log("--------------------------");
+
+  createDictJson(dict);
+
   // readBufferFile();
   const resultFile = path.join(__dirname, "tmp", "result.txt");
   return res.status(200).json(response);

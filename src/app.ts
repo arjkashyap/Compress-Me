@@ -19,9 +19,17 @@ export const bufferCompressed = path.join(
 // Compresse file uploaded by the user during decompress request
 export const bufferUpload = path.join(
   __dirname,
-  "utile",
+  "utils",
   "buffer-store",
   "compressed-upload"
+);
+
+// Dictonary json file for the compressed output
+export const bufferCompressedDict = path.join(
+  __dirname,
+  "utils",
+  "dict",
+  "compressed-out-dict.json"
 );
 
 app.use(upload());
@@ -41,6 +49,12 @@ app.get("/", (req: Request, res: Response) => {
 app.get("/download-compressed", (req, res) => {
   console.log("Getting Compressed file");
   res.download(bufferCompressed);
+});
+
+// Download dictonary json
+app.get("/download-dict", (req, res) => {
+  console.log("Getting dictonary");
+  res.download(bufferCompressedDict);
 });
 
 // API Routes

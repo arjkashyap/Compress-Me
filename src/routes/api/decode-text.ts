@@ -33,10 +33,16 @@ export const decodeTextRouter: Router = express.Router();
 // });
 
 decodeTextRouter.post("/", (req: Request, res: Response) => {
+  console.log("req ");
   if (req.files) {
     console.log(req.files);
-    const file = req.files.filename;
-    const filename = file.name;
+    // const file = req.files.filename;
+    // console.log(file);
+    const file = req.files.myFile;
+    // console.log("f _> ");
+    // console.log(f);
+    // const filename = file.name;
+
     file.mv("./src/utils/buffer-store" + "/compressed-upload", (err) => {
       if (err) {
         console.log(err);

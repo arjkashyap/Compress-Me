@@ -17,6 +17,11 @@ const reqObject = {
 
 // script for reading uploaded file
 document.getElementById("input-file").addEventListener("change", getFile);
+document
+  .getElementById("input-bin-file")
+  .addEventListener("change", (event) => {
+    handleBufferFileUpload(event);
+  });
 
 // get uploaded file on change
 function getFile(event) {
@@ -73,7 +78,16 @@ async function makeRequest() {
 
   // console.log(response);
   if (resp.status === 200) {
-    validator.innerHTML = "Compression Success. Please check your downloads";
+    validator.innerHTML = `Compression Success. <br/>
+      Click 
+      <span style="color: green">
+      <a href='http://localhost:5000/download-compressed'>here</a>
+      </span> to download Compressed File. <br/>
+      Click 
+      <span style="color: green">
+        <a href='http://localhost:5000/download-dict'>here</a>
+      </span> to download Dictonary. 
+      `;
     validator.style.color = "teal";
     // orignalTextSize = resp.orignalTextSize;
     const orignalTextSize = resp.orignalSize;
@@ -84,42 +98,34 @@ async function makeRequest() {
     const compressedTextArr = resp.text; // This is an array
     const dict = resp.dict;
 
-    console.log(typeof compressedTextArr);
+    // Setting some messages on the browser
+    const cmpStatus = document.getElementById("cmp-details");
+    const statusMsg = `Size of Orignal Text = ${orignalTextSize} bytes<br\>
+     Size of Encoded Text = ${compressedTextSize} bytes <br/> 
+     Text Compressed by ${eff.toFixed(3)}%`;
 
-    let compressedTextStr = "";
-
-    // Take the numbers from response array and put them to string
-    compressedTextArr.forEach(
-      (e) => (compressedTextStr += e.toString() + "\n")
-    );
-
-    console.log("compressed text array type", typeof compressedTextStr);
-    // console.log(compressedTextArr.lenght());
-    // Creating blob
-    const blob = new Blob([compressedTextStr], { type: "text/plain" });
-    const blobUrl = window.URL.createObjectURL(blob);
-    // create a link element
-    const link = document.createElement("a");
-    // Set link's href to point to the Blob URL
-    link.href = blobUrl;
-    link.download = name;
-
-    // Append link to the body
-    document.body.appendChild(link);
-
-    link.dispatchEvent(
-      new MouseEvent("click", {
-        bubbles: true,
-        cancelable: true,
-        view: window,
-      })
-    );
-
-    // Remove link from body
-    document.body.removeChild(link);
+    cmpStatus.innerHTML = statusMsg;
   }
 }
 
 function makeDecompressRequest() {
   console.log("ahoy ?");
+}
+
+function handleBufferFileUpload(event) {
+  console.log("Ahoy ?");
+  const files = event.target.files;
+  const formData = new FormData();
+
+  formData.append("myFile", files[0]);
+
+  fetch("/api/decode-text", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => console.log(err));
 }
