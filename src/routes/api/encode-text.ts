@@ -7,7 +7,7 @@ import HMT from "../../utils/HMT";
 import { textEncode, readBits } from "../../utils/Encoder";
 import { EncoderResponse } from "../../types";
 import * as path from "path";
-
+import { createeBufferFile, readBufferFile } from "../../utils/HandleBuffer";
 export const encodeTextRouter: Router = express.Router();
 export let orignalTex: string;
 interface ResponseMsg {
@@ -64,15 +64,22 @@ encodeTextRouter.post("/", (req: Request, res: Response) => {
   console.log(`Text compressed by ${eff.toFixed(3)} %`);
   console.log("Size of dictionary is : ", hmt.dictSize(), " bytes");
 
+  /*
+      The compressed text is in the array called :-
+      encodedArray : Array<number>
+    */
+
   const response: EncoderResponse = {
     status: 200,
     orignalSize: orignalTextSize,
-    text: encodedArray,
     textSize: encodedTextSize,
-    dict: Array.from(dict),
     eff: compressionPercent,
   };
 
+  // create buffer file
+  createeBufferFile(encodedArray);
+  console.log("--------------------------");
+  // readBufferFile();
   const resultFile = path.join(__dirname, "tmp", "result.txt");
   return res.status(200).json(response);
   // return res.status(200).download(resultFile);
