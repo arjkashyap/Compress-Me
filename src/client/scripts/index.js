@@ -23,6 +23,12 @@ document
     handleBufferFileUpload(event);
   });
 
+document
+  .getElementById("input-json-dec")
+  .addEventListener("change", (event) => {
+    handleJsonUpload(event);
+  });
+
 // get uploaded file on change
 function getFile(event) {
   const input = event.target;
@@ -109,17 +115,30 @@ async function makeRequest() {
 }
 
 function makeDecompressRequest() {
-  console.log("ahoy ?");
+  console.log("ahoy ha ?");
+  const validators = document.getElementById("dec-validator");
+  if (
+    document.getElementById("input-bin-file").value === "" ||
+    document.getElementById("input-json-dec").vallue === ""
+  ) {
+    // you have a file
+    validators.innerHTML = "Make sure the upload file field is not empty";
+  } else {
+    validators.innerHTML = "";
+    fetch("/api/decode-text", {
+      method: "POST",
+    });
+  }
 }
 
-function handleBufferFileUpload(event) {
+async function handleBufferFileUpload(event) {
   console.log("Ahoy ?");
   const files = event.target.files;
   const formData = new FormData();
 
   formData.append("myFile", files[0]);
 
-  fetch("/api/decode-text", {
+  await fetch("/api/decode-text/upload-buffer", {
     method: "POST",
     body: formData,
   })
@@ -128,4 +147,17 @@ function handleBufferFileUpload(event) {
       console.log(data);
     })
     .catch((err) => console.log(err));
+}
+
+async function handleJsonUpload(event) {
+  console.log("Uploading json ??");
+  const files = event.target.files;
+  const formData = new FormData();
+
+  formData.append("myFile", files[0]);
+
+  await fetch("/api/decode-text/upload-json", {
+    method: "POST",
+    body: formData,
+  });
 }

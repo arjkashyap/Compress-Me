@@ -29,10 +29,23 @@ export function convertArrayToDict(
 // Functino takes the encoded text and the dictionary and decompresses the text
 export function decodeText(
   encodedArray: Array<number>,
-  dict: Map<string, string>
+  mp: Map<string, string>
 ): string {
+  // Inverting the map
+  const dict: Map<string, string> = new Map(
+    Array.from(mp, (entry) => [entry[1], entry[0]])
+  );
+
+  console.log("inverted map");
+  console.log(dict);
+
+  console.log("Inside Decoding function ");
   let result: string = "";
+  console.log("here array to be decoded is ");
+  console.log(encodedArray);
+  console.log("---------------Decoding-------------------------------");
   encodedArray.forEach((code: number, index: number) => {
+    // console.log("Decoding-> ", code);
     let local_code: string = "";
     let bitPtr: number;
     for (bitPtr = 0; bitPtr < MAX_BIT; bitPtr++) {
@@ -43,7 +56,7 @@ export function decodeText(
       } else {
         local_code += "0";
       }
-
+      // console.log("local code = ", local_code);
       if (dict.has(local_code)) {
         result += dict.get(local_code);
         local_code = "";
@@ -51,6 +64,7 @@ export function decodeText(
     }
   });
   // console.log(result);
-
+  console.log("result ?? han han");
+  console.log(result);
   return result;
 }

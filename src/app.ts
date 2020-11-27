@@ -19,8 +19,9 @@ export const bufferCompressed = path.join(
 // Compresse file uploaded by the user during decompress request
 export const bufferUpload = path.join(
   __dirname,
-  "utils",
-  "buffer-store",
+  "routes",
+  "api",
+  "uploads",
   "compressed-upload"
 );
 
@@ -57,8 +58,14 @@ app.get("/download-dict", (req, res) => {
   res.download(bufferCompressedDict);
 });
 
+app.post("/download-uncompressed", (req, res) => {
+  console.log("Donwload final uncompressed");
+});
+
 // API Routes
 app.use("/api/encode-text", encodeTextRouter);
 app.use("/api/decode-text", decodeTextRouter);
+
+
 
 app.listen(PORT, () => console.log(`Server Started on PORT ${PORT}`));
