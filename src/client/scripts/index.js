@@ -33,7 +33,6 @@ document
 function getFile(event) {
   const input = event.target;
   if ("files" in input && input.files.length > 0) {
-    console.log(input.files);
     placeFileContent(input.files[0]);
   }
 }
@@ -60,7 +59,6 @@ function readFileContent(file) {
 // The function takes the uploaded doc and makes
 // a request to the compression endpoint
 async function makeRequest() {
-  console.log("listen");
   const validator = document.getElementById("cmp-validator");
   const cmpDetails = document.getElementById("cmp-details");
   if (txt.length === 0) {
@@ -70,7 +68,6 @@ async function makeRequest() {
 
   validator.innerHTML = "";
   const url = URL + "/api/encode-text";
-  console.log("Making request to ", url);
 
   reqObject.body = JSON.stringify({ compressionString: txt });
 
@@ -79,8 +76,6 @@ async function makeRequest() {
   await fetch(url, reqObject)
     .then((response) => response.json())
     .then((result) => (resp = result));
-  console.log("response: ");
-  console.log(resp);
 
   // console.log(response);
   if (resp.status === 200) {
@@ -114,8 +109,7 @@ async function makeRequest() {
   }
 }
 
-function makeDecompressRequest() {
-  console.log("ahoy ha ?");
+async function makeDecompressRequest() {
   const validators = document.getElementById("dec-validator");
   if (
     document.getElementById("input-bin-file").value === "" ||
@@ -125,9 +119,39 @@ function makeDecompressRequest() {
     validators.innerHTML = "Make sure the upload file field is not empty";
   } else {
     validators.innerHTML = "";
-    fetch("/api/decode-text", {
+    await fetch("/api/decode-text", {
       method: "POST",
-    });
+    })
+      .then((response) => response.json())
+      .then((result) => (resp = result));
+
+    if (resp.status === 200) {
+      const decodedText = resp.text;
+      const blob = new Blob([decodedText], { type: "text/plain" });
+      const blobUrl = window.URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+
+      link.href = blobUrl;
+      link.download = name;
+
+      document.body.appendChild(link);
+
+      link.dispatchEvent(
+        new MouseEvent("click", {
+          bubbles: true,
+          cancelable: true,
+          view: window,
+        })
+      );
+
+      const decStatus = document.getElementById("dec-details");
+      decStatus.innerHTML = "Drink Some Water and Enjoy your file 🤭 ";
+      document.body.removeChild(link);
+    } else {
+      validators.innerHTML =
+        "Something Went wrong. We're trying to figure out what. <br/> Drink Some water meanwhile";
+    }
   }
 }
 
@@ -150,7 +174,6 @@ async function handleBufferFileUpload(event) {
 }
 
 async function handleJsonUpload(event) {
-  console.log("Uploading json ??");
   const files = event.target.files;
   const formData = new FormData();
 

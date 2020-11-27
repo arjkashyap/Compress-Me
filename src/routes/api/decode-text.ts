@@ -40,12 +40,10 @@ decodeTextRouter.post("/", async (req: Request, res: Response) => {
   // const compressedTxt: Array<number> = await readBufferFile(bufferUpload);
   let compressedTxt: Array<number> = await readBufferFile(bufferUpload);
 
-  console.log("my compressed texr !!!!!!!!!!!!!!!!!!!!!!!! ");
-  console.log(compressedTxt);
+  // console.log("my compressed texr !!!!!!!!!!!!!!!!!!!!!!!! ");
+  // console.log(compressedTxt);
   const dict: Map<string, string> = convertJsonToMap();
   console.log("dict");
-
-  dict.forEach((value, key) => console.log(`${key} => ${value}`));
 
   const decodedText: string = decodeText(compressedTxt, dict);
 
@@ -53,8 +51,10 @@ decodeTextRouter.post("/", async (req: Request, res: Response) => {
     status: 200,
     text: decodedText,
   };
-  console.log("decode text now");
-  console.log(decodedText);
+
+  // console.log("decode text now");
+  // console.log(decodedText);
+
   return res.status(200).json(response);
 
   // const dict: Map<string, string> = convertArrayToDict()

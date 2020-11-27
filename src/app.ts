@@ -42,13 +42,11 @@ app.use(express.static(__dirname + "/client"));
 
 // locahsot:500/
 app.get("/", (req: Request, res: Response) => {
-  console.log("Get request recieved");
   res.sendFile(path.join(__dirname, "client", "index.html"));
 });
 
 // Download compressed file
 app.get("/download-compressed", (req, res) => {
-  console.log("Getting Compressed file");
   res.download(bufferCompressed);
 });
 
@@ -58,14 +56,8 @@ app.get("/download-dict", (req, res) => {
   res.download(bufferCompressedDict);
 });
 
-app.post("/download-uncompressed", (req, res) => {
-  console.log("Donwload final uncompressed");
-});
-
 // API Routes
 app.use("/api/encode-text", encodeTextRouter);
 app.use("/api/decode-text", decodeTextRouter);
-
-
 
 app.listen(PORT, () => console.log(`Server Started on PORT ${PORT}`));

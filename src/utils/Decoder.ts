@@ -4,7 +4,7 @@
 
 import { FORMERR } from "dns";
 import { MAX_BIT } from "../constatns";
-import { DecoderResponse } from "../types";
+// import { DecoderResponse } from "../types";
 
 export function convertArrayToDict(
   arr: Array<Array<string>>
@@ -39,11 +39,7 @@ export function decodeText(
   console.log("inverted map");
   console.log(dict);
 
-  console.log("Inside Decoding function ");
   let result: string = "";
-  console.log("here array to be decoded is ");
-  console.log(encodedArray);
-  console.log("---------------Decoding-------------------------------");
   encodedArray.forEach((code: number, index: number) => {
     // console.log("Decoding-> ", code);
     let local_code: string = "";
@@ -64,7 +60,5 @@ export function decodeText(
     }
   });
   // console.log(result);
-  console.log("result ?? han han");
-  console.log(result);
   return result;
 }

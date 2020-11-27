@@ -104,6 +104,11 @@
   font-size: 0.7rem;
 }
 
+#dec-details {
+  color: darkblue;
+  font-size: 0.7rem;
+}
+
 @media only screen and (max-width: 900px) {
   .main {
     flex-direction: column;
