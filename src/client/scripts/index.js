@@ -29,12 +29,28 @@ document
     handleJsonUpload(event);
   });
 
+///////////////////////////////////////////////////////////////////////
+//////////////////////// Handle Files ///////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
 // get uploaded file on change
 function getFile(event) {
   const input = event.target;
+  const validator = document.getElementById("cmp-validator");
+  if (!isValidCmp(input, validator)) {
+    console.log("it is not valid");
+    input.value = "";
+    return;
+  }
   if ("files" in input && input.files.length > 0) {
     placeFileContent(input.files[0]);
   }
+}
+
+function getFileExt(inputDom) {
+  const fullPath = inputDom.value;
+  const ext = fullPath.split(".").pop();
+  return ext;
 }
 
 // perform operations on file read
@@ -56,9 +72,91 @@ function readFileContent(file) {
   });
 }
 
+async function handleBufferFileUpload(event) {
+  console.log("Ahoy ?");
+  const files = event.target.files;
+  const formData = new FormData();
+
+  formData.append("myFile", files[0]);
+
+  await fetch("/api/decode-text/upload-buffer", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => console.log(err));
+}
+
+async function handleJsonUpload(event) {
+  const files = event.target.files;
+  const validator = document.getElementById("dec-validator");
+  if (!isValidDec(event.target, validator)) {
+    return false;
+  }
+  const formData = new FormData();
+
+  formData.append("myFile", files[0]);
+
+  await fetch("/api/decode-text/upload-json", {
+    method: "POST",
+    body: formData,
+  });
+}
+
+// remove files from input field if any
+function clearInputFiles(fieldType) {
+  if (fieldType === "dec") {
+    const f1 = document.getElementById("input-bin-file");
+    const f2 = document.getElementById("input-json-dec");
+    f1.value = "";
+    f2.value = "";
+  } else if (fieldType === "enc") {
+    const f = document.getElementById("input-file");
+    f.value = "";
+  }
+}
+
+// validation for input files during compression
+function isValidCmp(fileSelector, validatorSelector) {
+  const allowedFiles = ["txt"];
+  const ext = getFileExt(fileSelector);
+
+  // validatre file extention
+  if (!allowedFiles.includes(ext)) {
+    validatorSelector.innerHTML =
+      "Sorry !! We only support '.txt' files at the moment. 😅  ";
+    return false;
+  }
+
+  validatorSelector.innerHTML = "";
+  return true;
+}
+
+function isValidDec(fileSelector, validatorSelector) {
+  const allowedFiles = ["json"];
+  const ext = getFileExt(fileSelector);
+
+  // validatre file extention
+  if (!allowedFiles.includes(ext)) {
+    validatorSelector.innerHTML =
+      "Hmm !! It looks like your input file is of the wrong format. 🤔";
+    return false;
+  }
+
+  validatorSelector.innerHTML = "";
+  return true;
+}
+///////////////////////////////////////////////////////////////////////
+//////////////////////// Handle Requests //////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
 // The function takes the uploaded doc and makes
 // a request to the compression endpoint
 async function makeRequest() {
+  clearInputFiles("enc");
   const validator = document.getElementById("cmp-validator");
   const cmpDetails = document.getElementById("cmp-details");
   if (txt.length === 0) {
@@ -110,6 +208,7 @@ async function makeRequest() {
 }
 
 async function makeDecompressRequest() {
+  clearInputFiles("dec");
   const validators = document.getElementById("dec-validator");
   if (
     document.getElementById("input-bin-file").value === "" ||
@@ -153,34 +252,4 @@ async function makeDecompressRequest() {
         "Something Went wrong. We're trying to figure out what. <br/> Drink Some water meanwhile";
     }
   }
-}
-
-async function handleBufferFileUpload(event) {
-  console.log("Ahoy ?");
-  const files = event.target.files;
-  const formData = new FormData();
-
-  formData.append("myFile", files[0]);
-
-  await fetch("/api/decode-text/upload-buffer", {
-    method: "POST",
-    body: formData,
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-    })
-    .catch((err) => console.log(err));
-}
-
-async function handleJsonUpload(event) {
-  const files = event.target.files;
-  const formData = new FormData();
-
-  formData.append("myFile", files[0]);
-
-  await fetch("/api/decode-text/upload-json", {
-    method: "POST",
-    body: formData,
-  });
 }

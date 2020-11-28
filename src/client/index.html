@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="./styles/index.css" />
   </head>
 
-  <body>
+  <body >
     <div class="heading-container jumbotron">
       <h1 class="title display-4">Compress Me</h1>
       <p class="lead">
@@ -76,6 +76,7 @@
                   class="close"
                   data-dismiss="modal"
                   aria-label="Close"
+                  onclick="clearInputFiles('enc')"
                 >
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -87,7 +88,7 @@
               <div class="file-form">
 
               <label for="input-file">Choose and upload the text file you want to compress<label><br />
-              <input type="file" id="input-file" />
+              <input type="file" id="input-file" class="file-input"/>
               </div>
                 <p class="validator" id="cmp-validator"></p>
                 <tr/>
@@ -97,6 +98,7 @@
                   type="button"
                   class="btn btn-secondary"
                   data-dismiss="modal"
+                  onclick="clearInputFiles('enc')"
                 >
                   Close
                 </button>
@@ -139,12 +141,13 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="dec-modal-label">Compress File</h5>
+                <h5 class="modal-title" id="dec-modal-label" >Compress File</h5>
                 <button
                   type="button"
                   class="close"
                   data-dismiss="modal"
                   aria-label="Close"
+                  onclick="clearInputFiles('dec')"
                 >
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -157,14 +160,14 @@
               
               <form method="POST" enctype="multipart/form-data" action="/api/decode-text">
                 <label for="input-bin-file">Upload the bin file<label><br />
-                <input type="file" id="input-bin-file" name="filename"/>
+                <input type="file" id="input-bin-file" name="filename" class="file-input"/>
                 <!-- <button type="button" class="btn btn-dark" id="">Upload</button> -->
                 <!-- <input type="submit" value="upload"> -->
               </form>
               
               <hr/>
               <label for="input-json-file">Upload the dictonary json file<label><br />
-              <input type="file" id="input-json-dec" />
+              <input type="file" id="input-json-dec" class="file-input"/>
 
 
               </div>
@@ -176,6 +179,7 @@
                   type="button"
                   class="btn btn-secondary"
                   data-dismiss="modal"
+                  onclick="clearInputFiles('dec')"
                 >
                   Close
                 </button>
