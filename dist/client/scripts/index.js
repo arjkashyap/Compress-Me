@@ -1,6 +1,6 @@
 let txt = ""; // content of the file uploaded
-const URL = "http://localhost:5000";
-// const ULR = "http://compress-me.herokuapp.com/"
+// const URL = "http://localhost:5000";
+const ULR = "http://compress-me.herokuapp.com";
 
 const reqObject = {
   method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -180,11 +180,11 @@ async function makeRequest() {
     validator.innerHTML = `<span class="cmp-result"> Success !! </span> <br/>
       Click 
       <span style="color: green">
-      <a href='http://localhost:5000/download-compressed'>here</a>
+      <a href='${URL}/download-compressed'>here</a>
       </span> to download Compressed File. <br/>
       Click 
       <span style="color: green">
-        <a href='http://localhost:5000/download-dict'>here</a>
+        <a href='${URL}/download-dict'>here</a>
       </span> to download Dictonary. 
       `;
     validator.style.color = "teal";
