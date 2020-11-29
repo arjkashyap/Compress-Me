@@ -28,6 +28,7 @@ const path = __importStar(require("path"));
 const bodyParser = __importStar(require("body-parser"));
 const encode_text_1 = require("./routes/api/encode-text");
 const decode_text_1 = require("./routes/api/decode-text");
+const csp = require("express-csp-header");
 const upload = require("express-fileupload");
 const app = express_1.default();
 const PORT = process.env.PORT || 5000;
@@ -36,6 +37,13 @@ exports.bufferCompressed = path.join(__dirname, "utils", "buffer-store", "compre
 exports.bufferUpload = path.join(__dirname, "routes", "api", "uploads", "compressed-upload");
 // Dictonary json file for the compressed output
 exports.bufferCompressedDict = path.join(__dirname, "utils", "dict", "compressed-out-dict.json");
+// CSP policy
+app.use(csp({
+    policies: {
+        "default-src": [csp.NONE],
+        "img-src": [csp.SELF],
+    },
+}));
 app.use(upload());
 app.use(bodyParser.json());
 app.use(express_1.default.static(__dirname + "/client"));

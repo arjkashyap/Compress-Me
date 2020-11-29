@@ -3,9 +3,9 @@ import * as path from "path";
 import * as bodyParser from "body-parser";
 import { encodeTextRouter } from "./routes/api/encode-text";
 import { decodeTextRouter } from "./routes/api/decode-text";
-
 import * as url from "url";
 
+const csp = require("express-csp-header");
 const upload = require("express-fileupload");
 
 const app: Application = express();
@@ -33,6 +33,16 @@ export const bufferCompressedDict = path.join(
   "utils",
   "dict",
   "compressed-out-dict.json"
+);
+
+// CSP policy
+app.use(
+  csp({
+    policies: {
+      "default-src": [csp.NONE],
+      "img-src": [csp.SELF],
+    },
+  })
 );
 
 app.use(upload());
