@@ -36,12 +36,8 @@ export function decodeText(
     Array.from(mp, (entry) => [entry[1], entry[0]])
   );
 
-  console.log("inverted map");
-  console.log(dict);
-
   let result: string = "";
   encodedArray.forEach((code: number, index: number) => {
-    // console.log("Decoding-> ", code);
     let local_code: string = "";
     let bitPtr: number;
     for (bitPtr = 0; bitPtr < MAX_BIT; bitPtr++) {
@@ -52,13 +48,11 @@ export function decodeText(
       } else {
         local_code += "0";
       }
-      // console.log("local code = ", local_code);
       if (dict.has(local_code)) {
         result += dict.get(local_code);
         local_code = "";
       }
     }
   });
-  // console.log(result);
   return result;
 }

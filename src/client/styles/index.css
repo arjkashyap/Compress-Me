@@ -23,6 +23,13 @@
   color: black;
 }
 
+.about {
+  margin-top: 2rem;
+  font-size: 1rem;
+  color: black;
+  font-family: "Sarabun", sans-serif;
+}
+
 .source-code-btn {
   border: black;
   border: solid var(--wt) 1px;
@@ -42,17 +49,27 @@
   display: flex;
 }
 
+.modal-title {
+  text-align: center;
+  font-weight: bold;
+  /* font-family: "Goldman", cursive; */
+}
+
 .enc {
   flex: 1;
   border: 2px solid var(--clr-sc);
   margin: 0.2rem;
+  margin-bottom: 2rem;
   width: auto;
+  font-family: "Sarabun", sans-serif;
 }
 
 .dec {
   flex: 1;
   border: 2px solid var(--clr-sc);
   margin: 0.2rem;
+  margin-bottom: 2rem;
+  font-family: "Sarabun", sans-serif;
 }
 
 .cmp-btn {
@@ -73,8 +90,20 @@
 
 .dec-btn:hover {
   color: white;
+  padding: 1rem;
   background-color: black;
   border: 1px solid white;
+}
+
+.file-input {
+  /* background-color: rgba(146, 236, 169, 0.5); */
+}
+
+.cmp-result {
+  font-size: 1rem;
+  color: var(--clr-pm);
+  font-weight: bold;
+  text-align: center;
 }
 
 .submit-btn {
@@ -100,13 +129,19 @@
 }
 
 #cmp-details {
-  color: darkblue;
+  color: black;
   font-size: 0.7rem;
+  text-align: center;
+  background-color: rgba(54, 199, 115, 0.5);
+  padding: 1rem;
 }
 
 #dec-details {
-  color: darkblue;
+  color: black;
   font-size: 0.7rem;
+  text-align: center;
+  background-color: rgba(54, 199, 115, 0.5);
+  padding: 1rem;
 }
 
 @media only screen and (max-width: 900px) {

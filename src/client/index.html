@@ -17,6 +17,7 @@
       href="https://fonts.googleapis.com/css2?family=Electrolize&family=Goldman&display=swap"
       rel="stylesheet"
     />
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles/index.css" />
   </head>
 
@@ -34,13 +35,25 @@
         >Source Code</a
       >
     </div>
+    <div class="container about">
+      <p>
+
+      This web page provides free lossless compression for text files. We use a technique called Huffman encoding which assignes bit sequences 
+      to characters to data. The bit sequences are assigned on the bases of Max Heaps and are prefix free. The compression mechanism sits 
+      on an API running on a Heroku server. To learn more about the compression algorithms click <a target="__blank" href="https://www.geeksforgeeks.org/huffman-coding-greedy-algo-3/">here.</a>
+      </p>
+      <p>
+        The API is free to use for all developers. For More information refer to the source code button above. 
+        This web page provides an interface to communicate with the API.  
+        To get Started, choose a Text file of your choice whose size is greater than 1Kb and refer to the section below
+      </p>
+    </div>
     <br />
     <div class="gs">
-      <h3>Getting Started</h3>
     </div>
     <div class="main container">
       <div class="enc container">
-        <h3>Compression</h3>
+        <h3 class="modal-title">Compression</h3>
         <hr />
         <p>
           To perform text compression, click on the link given below and enter
@@ -113,7 +126,7 @@
 
         <!-- Decompress  -->
       <div class="dec container">
-        <h3>Decompress</h3>
+        <h3 class="modal-title">Decompress</h3>
         <hr />
         <p>
           To perform text compression, click on the link given below and enter

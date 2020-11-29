@@ -17,14 +17,11 @@ export function createDictJson(mp: Map<string, string>): void {
   });
 
   const data = JSON.stringify(jsonObject);
-  console.log(JSON.stringify(jsonObject));
   fs.writeFileSync(bufferCompressedDict, data);
-  console.log("here err ?");
 }
 
 // Function converts the uploaded json dictonary to map
 export function convertJsonToMap(): Map<string, string> {
   const dict: Map<string, string> = new Map(Object.entries(jsonDict));
-  console.log("map dict");
   return dict;
 }

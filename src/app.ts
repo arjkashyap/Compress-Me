@@ -37,7 +37,6 @@ app.use(upload());
 
 app.use(bodyParser.json());
 
-// console.log(__dirname + "/client");
 app.use(express.static(__dirname + "/client"));
 
 // locahsot:500/
@@ -52,7 +51,6 @@ app.get("/download-compressed", (req, res) => {
 
 // Download dictonary json
 app.get("/download-dict", (req, res) => {
-  console.log("Getting dictonary");
   res.download(bufferCompressedDict);
 });
 

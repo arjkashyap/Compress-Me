@@ -55,7 +55,6 @@ encodeTextRouter.post("/", (req: Request, res: Response) => {
 
   const orignalTextSize = text.length;
   const encodedTextSize = encodedArray.length * 4;
-  console.log(dict);
   console.log(
     `Size of orignal text: ${orignalTextSize} bytes. Size of Encoded text: ${encodedTextSize} bytes.`
   );
@@ -65,11 +64,6 @@ encodeTextRouter.post("/", (req: Request, res: Response) => {
   const eff = ((text.length - encodedArray.length * 4) / text.length) * 100;
   console.log(`Text compressed by ${eff.toFixed(3)} %`);
   console.log("Size of dictionary is : ", hmt.dictSize(), " bytes");
-
-  /*
-      The compressed text is in the array called :-
-      encodedArray : Array<number>
-    */
 
   const response: EncoderResponse = {
     status: 200,
@@ -81,12 +75,8 @@ encodeTextRouter.post("/", (req: Request, res: Response) => {
   // create buffer file
   createeBufferFile(encodedArray);
 
-  console.log("--------------------------");
-
   createDictJson(dict);
 
-  // readBufferFile();
   const resultFile = path.join(__dirname, "tmp", "result.txt");
   return res.status(200).json(response);
-  // return res.status(200).download(resultFile);
 });

@@ -94,7 +94,6 @@ export default class HMT {
   buildDict(): Map<string, string> {
     let dct: Map<string, string> = new Map();
     this.buildDict_util(dct, this.root);
-    console.log("dictonary built");
 
     // Changing the string with only zeros to handle corner case
     dct = this.updateZeroValue(dct);

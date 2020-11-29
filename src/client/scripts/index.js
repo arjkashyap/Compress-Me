@@ -1,5 +1,6 @@
 let txt = ""; // content of the file uploaded
 const URL = "http://localhost:5000";
+// const ULR = "http://compress-me.herokuapp.com/"
 
 const reqObject = {
   method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -73,7 +74,6 @@ function readFileContent(file) {
 }
 
 async function handleBufferFileUpload(event) {
-  console.log("Ahoy ?");
   const files = event.target.files;
   const formData = new FormData();
 
@@ -177,7 +177,7 @@ async function makeRequest() {
 
   // console.log(response);
   if (resp.status === 200) {
-    validator.innerHTML = `Compression Success. <br/>
+    validator.innerHTML = `<span class="cmp-result"> Success !! </span> <br/>
       Click 
       <span style="color: green">
       <a href='http://localhost:5000/download-compressed'>here</a>
@@ -208,7 +208,6 @@ async function makeRequest() {
 }
 
 async function makeDecompressRequest() {
-  clearInputFiles("dec");
   const validators = document.getElementById("dec-validator");
   if (
     document.getElementById("input-bin-file").value === "" ||
@@ -251,5 +250,6 @@ async function makeDecompressRequest() {
       validators.innerHTML =
         "Something Went wrong. We're trying to figure out what. <br/> Drink Some water meanwhile";
     }
+    clearInputFiles("dec");
   }
 }
