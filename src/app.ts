@@ -4,6 +4,8 @@ import * as bodyParser from "body-parser";
 import { encodeTextRouter } from "./routes/api/encode-text";
 import { decodeTextRouter } from "./routes/api/decode-text";
 
+import * as url from "url";
+
 const upload = require("express-fileupload");
 
 const app: Application = express();
@@ -41,6 +43,8 @@ app.use(express.static(__dirname + "/client"));
 
 // locahsot:500/
 app.get("/", (req: Request, res: Response) => {
+  console.log("recieved a get requ");
+  console.log(req.protocol + "://" + req.get("host") + req.originalUrl);
   res.sendFile(path.join(__dirname, "client", "index.html"));
 });
 

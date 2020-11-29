@@ -41,6 +41,8 @@ app.use(bodyParser.json());
 app.use(express_1.default.static(__dirname + "/client"));
 // locahsot:500/
 app.get("/", (req, res) => {
+    console.log("recieved a get requ");
+    console.log(req.protocol + "://" + req.get("host") + req.originalUrl);
     res.sendFile(path.join(__dirname, "client", "index.html"));
 });
 // Download compressed file

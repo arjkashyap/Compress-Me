@@ -156,6 +156,7 @@ function isValidDec(fileSelector, validatorSelector) {
 // The function takes the uploaded doc and makes
 // a request to the compression endpoint
 async function makeRequest() {
+  console.log("Making compress req");
   clearInputFiles("enc");
   const validator = document.getElementById("cmp-validator");
   const cmpDetails = document.getElementById("cmp-details");
@@ -165,7 +166,7 @@ async function makeRequest() {
   }
 
   validator.innerHTML = "";
-  const url = URL + "/api/encode-text";
+  const url = "/api/encode-text";
 
   reqObject.body = JSON.stringify({ compressionString: txt });
 
