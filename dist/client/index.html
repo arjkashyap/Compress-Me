@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Compress ME: A lossless text compression client service</title>
+
+    <!-- Bootstrap css -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Electrolize&family=Goldman&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/index.css" />
+  </head>
+
+  <body >
+    <div class="heading-container jumbotron">
+      <h1 class="title display-4">Compress Me</h1>
+      <p class="lead">
+        A simple client service for lossless compression of text data.
+      </p>
+      <a
+        class="source-code-btn btn btn-primary btn-lg"
+        target="__blank"
+        href="https://github.com/bing101/Compress-Me"
+        role="button"
+        >Source Code</a
+      >
+    </div>
+    <div class="container about">
+      <p>
+
+      This web page provides free lossless compression for text files. We use a technique called Huffman encoding which assignes bit sequences 
+      to characters to data. The bit sequences are assigned on the bases of Max Heaps and are prefix free. The compression mechanism sits 
+      on an API running on a Heroku server. To learn more about the compression algorithms click <a target="__blank" href="https://www.geeksforgeeks.org/huffman-coding-greedy-algo-3/">here.</a>
+      </p>
+      <p>
+        The API is free to use for all developers. For More information refer to the source code button above. 
+        This web page provides an interface to communicate with the API.  
+        To get Started, choose a Text file of your choice whose size is greater than 1Kb and refer to the section below
+      </p>
+    </div>
+    <br />
+    <div class="gs">
+    </div>
+    <div class="main container">
+      <div class="enc container">
+        <h3 class="modal-title">Compression</h3>
+        <hr />
+        <p>
+          To perform text compression, click on the link given below and enter
+          the text. After clicking on submit, the browser makes request to our
+          compression API which returns an encoded file and a dictonary. This
+          file is the result of humman encoding and can be decompressed using
+          the dictonary provided
+        </p>
+
+        <button
+          class="cmp-btn btn btn-primary btn-lg btn-block"
+          data-toggle="modal"
+          data-target="#enc-modal"
+        >
+          Compress Text
+        </button>
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="enc-modal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="enc-modal"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="enc-modal-label">Compress File</h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                  onclick="clearInputFiles('enc')"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+              </div>
+
+              <!-- File upload -->
+              <div class="file-form">
+
+              <label for="input-file">Choose and upload the text file you want to compress<label><br />
+              <input type="file" id="input-file" class="file-input"/>
+              </div>
+                <p class="validator" id="cmp-validator"></p>
+                <tr/>
+                <p class="validator" id="cmp-details"></p>
+                <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                  onclick="clearInputFiles('enc')"
+                >
+                  Close
+                </button>
+                <button type="button" id="txt-submit" class="submit-btn btn btn-primary" onclick="makeRequest()">
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <!-- Decompress  -->
+      <div class="dec container">
+        <h3 class="modal-title">Decompress</h3>
+        <hr />
+        <p>
+          To perform text compression, click on the link given below and enter
+          the text. After clicking on submit, the browser makes request to our
+          compression API which returns an encoded file and a dictonary. This
+          file is the result of humman encoding and can be decompressed using
+          the dictonary provided
+        </p>
+        <button class="dec-btn btn btn-primary btn-lg btn-block"
+                data-toggle="modal"
+                data-target="#dec-modal"
+        >
+          Decompress Text
+        </button>
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="dec-modal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="dec-modal"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="dec-modal-label" >Compress File</h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                  onclick="clearInputFiles('dec')"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+              </div>
+
+              <!-- File upload -->
+              <div class="file-form">
+              
+              <form method="POST" enctype="multipart/form-data" action="/api/decode-text">
+                <label for="input-bin-file">Upload the bin file<label><br />
+                <input type="file" id="input-bin-file" name="filename" class="file-input"/>
+                <!-- <button type="button" class="btn btn-dark" id="">Upload</button> -->
+                <!-- <input type="submit" value="upload"> -->
+              </form>
+              
+              <hr/>
+              <label for="input-json-file">Upload the dictonary json file<label><br />
+              <input type="file" id="input-json-dec" class="file-input"/>
+
+
+              </div>
+                <p class="validator" id="dec-validator"></p>
+                <tr/>
+                <p class="validator" id="dec-details"></p>
+                <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                  onclick="clearInputFiles('dec')"
+                >
+                  Close
+                </button>
+                <button type="button" id="txt-submit" class="submit-btn btn btn-primary" onclick="makeDecompressRequest()">
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./scripts/index.js"></script>
+  </body>
+</html>

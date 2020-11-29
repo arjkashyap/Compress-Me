@@ -1,0 +1,151 @@
+.html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+:root {
+  --clr-pm: rgb(67, 185, 103);
+  --clr-sc: black;
+  --wt: white;
+}
+
+.heading-container {
+  margin: 0.1rem;
+  color: var(--wt);
+  padding: 1.5rem;
+  background-color: var(--clr-pm);
+}
+
+.title {
+  font-style: bold;
+  font-family: "Goldman", cursive;
+  color: black;
+}
+
+.about {
+  margin-top: 2rem;
+  font-size: 1rem;
+  color: black;
+  font-family: "Sarabun", sans-serif;
+}
+
+.source-code-btn {
+  border: black;
+  border: solid var(--wt) 1px;
+  background-color: rgb(3, 41, 25);
+}
+
+.source-code-btn:hover {
+  background-color: rgb(2, 12, 12);
+}
+
+.gs {
+  margin: 0;
+  text-align: center;
+}
+
+.main {
+  display: flex;
+}
+
+.modal-title {
+  text-align: center;
+  font-weight: bold;
+  /* font-family: "Goldman", cursive; */
+}
+
+.enc {
+  flex: 1;
+  border: 2px solid var(--clr-sc);
+  margin: 0.2rem;
+  margin-bottom: 2rem;
+  width: auto;
+  font-family: "Sarabun", sans-serif;
+}
+
+.dec {
+  flex: 1;
+  border: 2px solid var(--clr-sc);
+  margin: 0.2rem;
+  margin-bottom: 2rem;
+  font-family: "Sarabun", sans-serif;
+}
+
+.cmp-btn {
+  border: 1px solid white;
+  background-color: var(--clr-pm);
+  margin: 0.3rem;
+}
+
+.cmp-btn:hover {
+  background-color: rgb(11, 65, 11);
+}
+
+.dec-btn {
+  color: black;
+  background-color: white;
+  border: 1px solid black;
+}
+
+.dec-btn:hover {
+  color: white;
+  padding: 1rem;
+  background-color: black;
+  border: 1px solid white;
+}
+
+.file-input {
+  /* background-color: rgba(146, 236, 169, 0.5); */
+}
+
+.cmp-result {
+  font-size: 1rem;
+  color: var(--clr-pm);
+  font-weight: bold;
+  text-align: center;
+}
+
+.submit-btn {
+  border: 1px solid white;
+  background-color: var(--clr-pm);
+  margin: 0.3rem;
+}
+
+.submit-btn:hover {
+  background-color: rgb(11, 65, 11);
+}
+
+.validator {
+  color: red;
+  margin: 1rem;
+  margin-top: 0;
+  font-family: sans-serif;
+  font-size: 0.8rem;
+}
+
+.file-form {
+  margin: 1rem;
+}
+
+#cmp-details {
+  color: black;
+  font-size: 0.7rem;
+  text-align: center;
+  background-color: rgba(54, 199, 115, 0.5);
+  padding: 1rem;
+}
+
+#dec-details {
+  color: black;
+  font-size: 0.7rem;
+  text-align: center;
+  background-color: rgba(54, 199, 115, 0.5);
+  padding: 1rem;
+}
+
+@media only screen and (max-width: 900px) {
+  .main {
+    flex-direction: column;
+  }
+}
