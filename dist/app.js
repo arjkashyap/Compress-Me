@@ -37,13 +37,15 @@ exports.bufferCompressed = path.join(__dirname, "utils", "buffer-store", "compre
 exports.bufferUpload = path.join(__dirname, "routes", "api", "uploads", "compressed-upload");
 // Dictonary json file for the compressed output
 exports.bufferCompressedDict = path.join(__dirname, "utils", "dict", "compressed-out-dict.json");
-// CSP policy
-app.use(csp({
-    policies: {
-        "default-src": [csp.NONE],
-        "img-src": [csp.SELF],
-    },
-}));
+// // CSP policy
+// app.use(
+//   csp({
+//     policies: {
+//       "default-src": [csp.NONE],
+//       "img-src": [csp.SELF],
+//     },
+//   })
+// );
 app.use(upload());
 app.use(bodyParser.json());
 app.use(express_1.default.static(__dirname + "/client"));

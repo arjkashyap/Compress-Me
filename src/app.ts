@@ -35,15 +35,15 @@ export const bufferCompressedDict = path.join(
   "compressed-out-dict.json"
 );
 
-// CSP policy
-app.use(
-  csp({
-    policies: {
-      "default-src": [csp.NONE],
-      "img-src": [csp.SELF],
-    },
-  })
-);
+// // CSP policy
+// app.use(
+//   csp({
+//     policies: {
+//       "default-src": [csp.NONE],
+//       "img-src": [csp.SELF],
+//     },
+//   })
+// );
 
 app.use(upload());
 
