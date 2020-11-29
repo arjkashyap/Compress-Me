@@ -4,7 +4,7 @@
   "description": "Rest api for lossless text compresssion",
   "main": "app.js",
   "scripts": {
-    "start": "node dist/app.js",
+    "start": "nodemon dist/app.js",
     "dev": "nodemon src/app.ts",
     "build": "tsc -p ."
   },
