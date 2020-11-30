@@ -38,7 +38,7 @@ Open the browser on **http://localhost:5000**
 
 [![YT](./img-preview.PNG)](https://www.youtube.com/watch?v=ouT8fTqci90 "Web App for Text compression")
 
-A short video for usage guid is given below.
+For A short Video Guid click <a href="https://www.youtube.com/watch?v=ouT8fTqci90">here</a>
 
 - Open the web page at localhost:5000
 - Click on Compress button at the bottom
