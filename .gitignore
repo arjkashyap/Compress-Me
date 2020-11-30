@@ -1,5 +1,5 @@
 *.exe
 *.txt
 node_modules/
-# dist/
+dist/
 Procfile
